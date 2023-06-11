@@ -9,6 +9,10 @@ export const siteConfig = {
       title: "Home",
       href: "/",
     },
+    {
+      title: "Cake",
+      href: "/cake",
+    },
   ],
   links: {
     twitter: "https://twitter.com/javazone",
