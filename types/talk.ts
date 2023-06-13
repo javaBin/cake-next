@@ -15,7 +15,6 @@ export interface Talk {
   language: Language
   format: Format
   level: Level
-  keywords?: string[]
   speakers: Speaker[]
   video: string,
   startTimeZulu?: Date
@@ -28,6 +27,7 @@ export interface CakeDataRow {
   talk: Talk
   state: State
   tags?: string[]
+  keywords?: string[]
   postcode?: string
   changes?: boolean
   lastChangedBy?: CakeSystem

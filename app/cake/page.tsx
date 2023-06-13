@@ -3,11 +3,11 @@ import {DataTable} from "./data/data-table"
 import {CakeDataRow, Sessions, SleepingPillResponse} from "@/types/talk";
 
 const url = "https://sleepingpill.javazone.no/public/allSessions/javazone_2022";
+const allSessionsUrl = "https://sleepingpill.javazone.no/public/allSessions"
 
 async function getData(): Promise<SleepingPillResponse> {
   const res = await fetch(url, { next: { revalidate: 10 } })
 
-  // Recommendation: handle errors
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error('Failed to fetch data')
@@ -17,8 +17,6 @@ async function getData(): Promise<SleepingPillResponse> {
 }
 
 function tranformData(data: SleepingPillResponse): CakeDataRow[] {
-  console.log("data", data);
-
   return data.sessions.map(value => {
     return {
       talk: value,
@@ -51,17 +49,3 @@ export default async function CakeIndexPage() {
     </div>
   )
 }
-
-/**
-export default function CakeIndexPage() {
-  return (
-    <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-      <div className="flex max-w-[980px] flex-col items-start gap-2">
-
-
-
-      </div>
-    </section>
-  )
-}
-**/
