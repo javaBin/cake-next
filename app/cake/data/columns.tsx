@@ -14,11 +14,31 @@ import {
 } from "@/components/ui/dropdown-menu"
 import {Badge} from "@/components/ui/badge";
 import {SortableColumnHeader} from "@/app/cake/data/sortableheader";
+import {Checkbox} from "@/components/ui/checkbox";
 
 /**
  * Ref: https://tanstack.com/table/v8/docs/guide/column-defs
  */
 export const columns: ColumnDef<CakeDataRow>[] = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={table.getIsAllPageRowsSelected()}
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
   {
     accessorFn: row => `${row.talk.title}`,
     id: "title",

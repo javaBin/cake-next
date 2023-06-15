@@ -8,8 +8,7 @@ import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
+  useReactTable, VisibilityState,
 } from "@tanstack/react-table"
 
 import {
@@ -21,7 +20,6 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {DataTablePagination} from "@/app/cake/data/pagination";
 import {DataTableViewOptions} from "@/app/cake/data/viewoptions";
@@ -40,6 +38,8 @@ export function DataTable<TData, TValue>({
     []
   )
   const [sorting, setSorting] = useState<SortingState>([])
+  const [rowSelection, setRowSelection] = useState({})
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
 
   const table = useReactTable({
     data,
@@ -48,10 +48,14 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
     onColumnFiltersChange: setColumnFilters,
     onSortingChange: setSorting,
+    onRowSelectionChange: setRowSelection,
+    onColumnVisibilityChange: setColumnVisibility,
     getFilteredRowModel: getFilteredRowModel(),
     state: {
       sorting,
       columnFilters,
+      rowSelection,
+      columnVisibility
     },
   })
 
@@ -59,12 +63,17 @@ export function DataTable<TData, TValue>({
     <div>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter talks..."
+          type="text"
+          id="ftsb"
+          name="ftsb"
           value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("title")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
+          autoComplete="off"
+          data-lpignore="true"
+          data-form-type="other"
         />
         <DataTableViewOptions table={table} />
       </div>
