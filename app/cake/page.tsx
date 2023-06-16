@@ -17,9 +17,15 @@ async function getData(): Promise<SleepingPillResponse> {
 }
 
 function tranformData(data: SleepingPillResponse): CakeDataRow[] {
-  return data.sessions.map(value => {
+   return data.sessions.map(value => {
+     const strToDate = (v: Date | undefined) => v ? new Date(v) : undefined;
+     const talk = value;
+     talk.startTime = strToDate(talk.startTime)
+     talk.endTime = strToDate(talk.endTime)
+     talk.startTimeZulu = strToDate(talk.startTimeZulu)
+     talk.endTimeZulu = strToDate(talk.endTimeZulu)
     return {
-      talk: value,
+      talk,
       state: "SUBMITTED",
       tags: [],
       postcode: "",
@@ -35,7 +41,7 @@ function tranformData(data: SleepingPillResponse): CakeDataRow[] {
           changedBy: "CAKE"
         }
       ]
-    }
+    };
   })
 }
 

@@ -1,6 +1,7 @@
 "use client"
 
-import {ColumnDef} from "@tanstack/react-table"
+import {compareAsc, format, isValid} from 'date-fns'
+import {ColumnDef, Row} from "@tanstack/react-table"
 import {CakeDataRow, Format, Language, State} from "@/types/talk";
 import {MoreHorizontal, Presentation, Users, Zap} from "lucide-react"
 import {Button} from "@/components/ui/button"
@@ -15,6 +16,7 @@ import {
 import {Badge} from "@/components/ui/badge";
 import {SortableColumnHeader} from "@/app/cake/data/sortableheader";
 import {Checkbox} from "@/components/ui/checkbox";
+import {ro} from "date-fns/locale";
 
 /**
  * Ref: https://tanstack.com/table/v8/docs/guide/column-defs
@@ -134,7 +136,7 @@ export const columns: ColumnDef<CakeDataRow>[] = [
     }
   },
   {
-    accessorKey: "internalRating",
+    accessorFn: row => `${row.internalRating}`,
     id: "internalRating",
     header: ({ column }) => (
       <SortableColumnHeader column={column} title="Rating" />
@@ -146,9 +148,29 @@ export const columns: ColumnDef<CakeDataRow>[] = [
     header: "Room",
   },
   {
-    accessorFn: row => `${row.talk.startTime} - ${row.talk.endTime}`,
+    accessorFn: row => `${row.talk.startTime}`,
     id: "slot",
-    header: "Slot",
+    header: ({ column }) => (
+      <SortableColumnHeader column={column} title="Slot" />
+    ),
+    cell: ({row}) => {
+      const talk = row.original.talk;
+      if (talk.startTime && isValid(talk.startTime) &&
+        talk.endTime && isValid(talk.endTime)) {
+        let startTime = format(talk.startTime, 'HH:mm');
+        let endTime = format(talk.endTime, 'HH:mm');
+        return <><Badge variant="secondary">{startTime}</Badge><Badge variant="secondary">{endTime}</Badge></>
+      }
+      return "";
+    },
+    sortingFn: (rowA: Row<CakeDataRow>, rowB: Row<CakeDataRow>, columnId: string): number => {
+      const talkA: Date | undefined = rowA.original.talk.startTime;
+      const talkB: Date | undefined = rowB.original.talk.startTime;
+      if (talkA && isValid(talkA) && talkB && isValid(talkB)) {
+        return compareAsc(talkA, talkB)
+      }
+      return 0;
+    }
   },
   {
     accessorKey: "postcode",
