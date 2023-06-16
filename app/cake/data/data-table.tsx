@@ -5,11 +5,12 @@ import {
   ColumnFiltersState,
   SortingState,
   getFilteredRowModel,
+  getFacetedRowModel,
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  useReactTable, VisibilityState,
+  useReactTable, VisibilityState, getFacetedMinMaxValues, getFacetedUniqueValues,
 } from "@tanstack/react-table"
 
 import {
@@ -25,6 +26,7 @@ import { Input } from "@/components/ui/input"
 import {DataTablePagination} from "@/app/cake/data/pagination";
 import {DataTableViewOptions} from "@/app/cake/data/viewoptions";
 import {useState} from "react";
+import {DebouncedInput, Filter, fuzzyFilter} from "@/app/cake/data/filters";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -35,6 +37,7 @@ export function DataTable<TData, TValue>({
                                            columns,
                                            data,
                                          }: DataTableProps<TData, TValue>) {
+  const [globalFilter, setGlobalFilter] = useState('')
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
     []
   )
@@ -47,17 +50,26 @@ export function DataTable<TData, TValue>({
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    getFacetedMinMaxValues: getFacetedMinMaxValues(),
+    globalFilterFn: fuzzyFilter,
+    onGlobalFilterChange: setGlobalFilter,
     onColumnFiltersChange: setColumnFilters,
     onSortingChange: setSorting,
     onRowSelectionChange: setRowSelection,
     onColumnVisibilityChange: setColumnVisibility,
-    getFilteredRowModel: getFilteredRowModel(),
-    getSortedRowModel: getSortedRowModel(),
     state: {
       sorting,
+      globalFilter,
       columnFilters,
       rowSelection,
       columnVisibility
+    },
+    filterFns: {
+      fuzzy: fuzzyFilter,
     },
   })
 
@@ -68,9 +80,10 @@ export function DataTable<TData, TValue>({
           type="text"
           id="ftsb"
           name="ftsb"
-          value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
+          //value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("title")?.setFilterValue(event.target.value)
+            //table.getColumn("title")?.setFilterValue(event.target.value)
+            setGlobalFilter(String(event.target.value))
           }
           className="max-w-sm"
           autoComplete="off"
@@ -93,6 +106,11 @@ export function DataTable<TData, TValue>({
                           header.column.columnDef.header,
                           header.getContext()
                         )}
+                      {header.column.getCanFilter() ? (
+                        <div>
+                          <Filter column={header.column} table={table} />
+                        </div>
+                      ) : null}
                     </TableHead>
                   )
                 })}
