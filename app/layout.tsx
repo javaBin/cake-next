@@ -1,12 +1,13 @@
 import "@/styles/globals.css"
-import { Metadata } from "next"
+import {Metadata} from "next"
 
-import { siteConfig } from "@/config/site"
-import { fontSans } from "@/lib/fonts"
-import { cn } from "@/lib/utils"
-import { SiteHeader } from "@/components/site-header"
-import { TailwindIndicator } from "@/components/tailwind-indicator"
-import { ThemeProvider } from "@/components/theme-provider"
+import {siteConfig} from "@/config/site"
+import {fontSans} from "@/lib/fonts"
+import {cn} from "@/lib/utils"
+import {SiteHeader} from "@/components/site-header"
+import {TailwindIndicator} from "@/components/tailwind-indicator"
+import {ThemeProvider} from "@/components/theme-provider"
+import React from "react";
 
 export const metadata: Metadata = {
   title: {
@@ -36,7 +37,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "min-h-screen bg-background font-sans antialiased",
+            "overscroll-non min-h-screen overflow-x-hidden bg-background font-sans antialiased",
             fontSans.variable
           )}
         >
