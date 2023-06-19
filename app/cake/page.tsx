@@ -1,6 +1,6 @@
 import {columns} from "./data/columns"
 import {DataTable} from "./data/data-table"
-import {CakeDataRow, Sessions, SleepingPillResponse} from "@/types/talk";
+import {CakeDataRow, SleepingPillResponse} from "@/types/talk";
 
 const url = "https://sleepingpill.javazone.no/public/allSessions/javazone_2022";
 const allSessionsUrl = "https://sleepingpill.javazone.no/public/allSessions"
@@ -33,7 +33,7 @@ function tranformData(data: SleepingPillResponse): CakeDataRow[] {
       lastChangedBy: "CAKE",
       room: "",
       comment: "",
-      internalRating: -1,
+      internalRating: Math.floor(Math.random() * 5),
       internalComment: "",
       changeHistory: [
         {
@@ -50,7 +50,7 @@ export default async function CakeIndexPage() {
   const data = tranformData(res);
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container py-5">
       <DataTable columns={columns} data={data} />
     </div>
   )
