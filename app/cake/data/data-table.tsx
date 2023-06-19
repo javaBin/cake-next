@@ -3,30 +3,26 @@
 import {
   ColumnDef,
   ColumnFiltersState,
-  SortingState,
-  getFilteredRowModel,
-  getFacetedRowModel,
   flexRender,
   getCoreRowModel,
+  getFacetedMinMaxValues,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  useReactTable, VisibilityState, getFacetedMinMaxValues, getFacetedUniqueValues,
+  SortingState,
+  useReactTable,
+  VisibilityState,
 } from "@tanstack/react-table"
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table"
 
-import { Input } from "@/components/ui/input"
+import {Input} from "@/components/ui/input"
 import {DataTablePagination} from "@/app/cake/data/pagination";
 import {DataTableViewOptions} from "@/app/cake/data/viewoptions";
 import {useState} from "react";
-import {DebouncedInput, Filter, fuzzyFilter} from "@/app/cake/data/filters";
+import {Filter, fuzzyFilter} from "@/app/cake/data/filters";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -43,7 +39,10 @@ export function DataTable<TData, TValue>({
   )
   const [sorting, setSorting] = useState<SortingState>([])
   const [rowSelection, setRowSelection] = useState({})
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
+    "changes": false,
+    "lastChangedBy": false
+  })
 
   const table = useReactTable({
     data,
@@ -70,22 +69,23 @@ export function DataTable<TData, TValue>({
     },
     filterFns: {
       fuzzy: fuzzyFilter,
-    },
+    }
   })
 
   return (
     <div>
-      <div className="flex items-center py-4">
+      <div className="flex flex-wrap py-4">
         <Input
           type="text"
           id="ftsb"
           name="ftsb"
+          placeholder="Search"
           //value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             //table.getColumn("title")?.setFilterValue(event.target.value)
             setGlobalFilter(String(event.target.value))
           }
-          className="max-w-sm"
+          className="grow md:max-w-sm md:grow-0"
           autoComplete="off"
           data-lpignore="true"
           data-form-type="other"
