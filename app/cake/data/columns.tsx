@@ -2,21 +2,50 @@
 
 import {compareAsc, format, isValid} from 'date-fns'
 import {ColumnDef, Row} from "@tanstack/react-table"
-import {CakeDataRow, Format, Language, State} from "@/types/talk";
-import {MoreHorizontal, Presentation, Users, Zap} from "lucide-react"
-import {Button} from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import {CakeDataRow, CakeSystem, Format, Language, State} from "@/types/talk";
+import {Presentation, Users, Zap} from "lucide-react"
 import {Badge} from "@/components/ui/badge";
 import {SortableColumnHeader} from "@/app/cake/data/sortableheader";
 import {Checkbox} from "@/components/ui/checkbox";
-import {ro} from "date-fns/locale";
+import {StarRating} from "@/components/ui/starRating";
+
+export type CakeColumn = { id: string, header: string };
+
+export type CakeColumns = {
+  title: CakeColumn,
+  speaker: CakeColumn,
+  format: CakeColumn,
+  length: CakeColumn,
+  lang: CakeColumn,
+  tags: CakeColumn,
+  keywords: CakeColumn,
+  state: CakeColumn,
+  internalRating: CakeColumn,
+  room: CakeColumn,
+  slot: CakeColumn,
+  postcode: CakeColumn,
+  changes: CakeColumn,
+  lastChangedBy: CakeColumn
+}
+
+export const cakeHeaders: CakeColumns = {
+  title: { id: "title", header: "Title" },
+  speaker: { id: "speaker", header: "Speaker" },
+  format: { id: "format", header: "Format" },
+  length: { id: "length", header: "Length" },
+  lang: { id: "lang", header: "Language" },
+  tags: { id: "tags", header: "Tags" },
+  keywords: { id: "keywords", header: "Keywords" },
+  state: { id: "state", header: "State" },
+  internalRating: { id: "internalRating", header: "Rating" },
+  room: { id: "room", header: "Room" },
+  slot: { id: "slot", header: "Slot" },
+  postcode: { id: "postcode", header: "Postcode" },
+  changes: { id: "changes", header: "Changes" },
+  lastChangedBy: { id: "lastChangedBy", header: "Last changed" }
+};
+
+
 
 /**
  * Ref: https://tanstack.com/table/v8/docs/guide/column-defs
@@ -43,24 +72,24 @@ export const columns: ColumnDef<CakeDataRow>[] = [
   },
   {
     accessorFn: row => `${row.talk.title}`,
-    id: "title",
+    id: cakeHeaders.title.id,
     header: ({ column }) => (
-      <SortableColumnHeader column={column} title="Title" />
+      <SortableColumnHeader column={column} title={cakeHeaders.title.header} />
     )
   },
   {
     accessorFn: row => `${row.talk.speakers.map(value => value.name).join(",")}`,
-    id: "speaker",
+    id: cakeHeaders.speaker.id,
     header: ({ column }) => (
-      <SortableColumnHeader column={column} title="Speaker" />
+      <SortableColumnHeader column={column} title={cakeHeaders.speaker.header} />
     )
   },
   {
     accessorFn: row => `${row.talk.format}`,
+    id: cakeHeaders.format.id,
     header: ({ column }) => (
-      <SortableColumnHeader column={column} title="Format" />
+      <SortableColumnHeader column={column} title={cakeHeaders.format.header} />
     ),
-    id: "format",
     cell: ({ row }) => {
       const value: Format = row.getValue("format")
       switch (value) {
@@ -75,15 +104,15 @@ export const columns: ColumnDef<CakeDataRow>[] = [
   },
   {
     accessorFn: row => `${row.talk.length}`,
-    id: "length",
+    id: cakeHeaders.length.id,
     header: ({ column }) => (
-      <SortableColumnHeader column={column} title="Length" />
+      <SortableColumnHeader column={column} title={cakeHeaders.length.header} />
     )
   },
   {
     accessorFn: row => `${row.talk.language}`,
-    header: "Language",
-    id: "lang",
+    id: cakeHeaders.lang.id,
+    header: cakeHeaders.lang.header,
     cell: ({ row }) => {
       const value: Language = row.getValue("lang")
       switch (value) {
@@ -96,9 +125,9 @@ export const columns: ColumnDef<CakeDataRow>[] = [
   },
   {
     accessorFn: row => `${row.tags}`,
-    id: "tags",
+    id: cakeHeaders.tags.id,
     header: ({ column }) => (
-      <SortableColumnHeader column={column} title="Tags" />
+      <SortableColumnHeader column={column} title={cakeHeaders.tags.header} />
     ),
     cell: ({ row }) => {
       const tags = row.original.tags;
@@ -107,8 +136,8 @@ export const columns: ColumnDef<CakeDataRow>[] = [
   },
   {
     accessorFn: row => `${row.keywords}`,
-    id: "keywords",
-    header: "Keywords",
+    id: cakeHeaders.keywords.id,
+    header: cakeHeaders.keywords.header,
     cell: ({ row }) => {
       const keywords = row.original.keywords;
       return keywords ? keywords.join(",") : "";
@@ -116,10 +145,10 @@ export const columns: ColumnDef<CakeDataRow>[] = [
   },
   {
     accessorFn: row => `${row.state}`,
-    id: "state",
-    header: "State",
+    id: cakeHeaders.state.id,
+    header: cakeHeaders.state.header,
     cell: ({ row }) => {
-      const value: State = row.getValue("state")
+      const value: State = row.getValue(cakeHeaders.state.id)
 
       switch (value) {
         case "DRAFT":
@@ -137,21 +166,26 @@ export const columns: ColumnDef<CakeDataRow>[] = [
   },
   {
     accessorFn: row => `${row.internalRating}`,
-    id: "internalRating",
+    id: cakeHeaders.internalRating.id,
     header: ({ column }) => (
-      <SortableColumnHeader column={column} title="Rating" />
-    )
+      <SortableColumnHeader column={column} title={cakeHeaders.internalRating.header} />
+    ),
+    cell: ({ row }) => {
+      const rating: number = row.getValue(cakeHeaders.internalRating.id)
+      const count = rating && rating >= 0 && rating <= 5 ? rating : 1;
+      return <StarRating count={count} rating={count} />
+    }
   },
   {
     accessorFn: row => `${row.talk.room}`,
-    id: "rooms",
-    header: "Room",
+    id: cakeHeaders.room.id,
+    header: cakeHeaders.room.header,
   },
   {
     accessorFn: row => `${row.talk.startTime}`,
-    id: "slot",
+    id: cakeHeaders.slot.id,
     header: ({ column }) => (
-      <SortableColumnHeader column={column} title="Slot" />
+      <SortableColumnHeader column={column} title={cakeHeaders.slot.header} />
     ),
     cell: ({row}) => {
       const talk = row.original.talk;
@@ -173,46 +207,30 @@ export const columns: ColumnDef<CakeDataRow>[] = [
     }
   },
   {
-    accessorKey: "postcode",
-    id: "postcode",
-    header: "Postcode",
+    accessorKey: cakeHeaders.postcode.id,
+    id: cakeHeaders.postcode.id,
+    header: cakeHeaders.postcode.header,
   },
   {
-    accessorKey: "changes",
-    id: "changes",
-    header: "Changes",
+    accessorKey: cakeHeaders.changes.id,
+    id: cakeHeaders.changes.id,
+    header: cakeHeaders.changes.header,
   },
   {
-    accessorKey: "lastChangedBy",
-    id: "lastChangedBy",
-    header: "Last changed",
-  },
-  {
-    id: "actions",
+    accessorKey: cakeHeaders.lastChangedBy.id,
+    id: cakeHeaders.lastChangedBy.id,
+    header: cakeHeaders.lastChangedBy.header,
     cell: ({ row }) => {
-      const dataRow: CakeDataRow = row.original
+      const value: CakeSystem = row.getValue("lastChangedBy")
 
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(dataRow.talk.id)}
-            >
-              Copy talk ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View speaker</DropdownMenuItem>
-            <DropdownMenuItem>View talk</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
+      switch (value) {
+        case "CAKE":
+          return <span><Badge variant="outline">Cake</Badge></span>
+        case "SUBMITIT":
+          return <span><Badge variant="outline">SubmitIt</Badge></span>
+        case "UNKNOWN":
+          return <span><Badge variant="destructive">Unknown</Badge></span>
+      }
     }
-  }
+  },
 ]
