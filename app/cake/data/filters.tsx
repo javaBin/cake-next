@@ -1,10 +1,7 @@
 import {Column, Table} from "@tanstack/react-table";
 import {InputHTMLAttributes, useEffect, useMemo, useState} from "react";
 
-import {
-  RankingInfo,
-  rankItem
-} from '@tanstack/match-sorter-utils'
+import {RankingInfo, rankItem} from '@tanstack/match-sorter-utils'
 import {FilterFn} from "@tanstack/table-core";
 import {Input} from "@/components/ui/input";
 
