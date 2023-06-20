@@ -45,7 +45,39 @@ export const cakeHeaders: CakeColumns = {
   lastChangedBy: { id: "lastChangedBy", header: "Last changed" }
 };
 
+export const cakeHeadersArray = [
+  cakeHeaders.title.id,
+  cakeHeaders.speaker.id,
+  cakeHeaders.format.id,
+  cakeHeaders.length.id,
+  cakeHeaders.lang.id,
+  cakeHeaders.tags.id,
+  cakeHeaders.keywords.id,
+  cakeHeaders.state.id,
+  cakeHeaders.internalRating.id,
+  cakeHeaders.room.id,
+  cakeHeaders.slot.id,
+  cakeHeaders.postcode.id,
+  cakeHeaders.changes.id,
+  cakeHeaders.lastChangedBy.id,
+]
 
+export const queryFieldsHeaders = [
+  { name: "title", label: "Title" },
+  { name: "speaker", label: "Speaker" },
+  { name: "format", label: "Format" },
+  { name: "length", label: "Length" },
+  { name: "lang", label: "Language" },
+  { name: "tags", label: "Tags" },
+  { name: "keywords", label: "Keywords" },
+  { name: "state", label: "State" },
+  { name: "internalRating", label: "Rating" },
+  { name: "room", label: "Room" },
+  { name: "slot", label: "Slot" },
+  { name: "postcode", label: "Postcode" },
+  { name: "changes", label: "Changes" },
+  { name: "lastChangedBy", label: "Last changed" }
+]
 
 /**
  * Ref: https://tanstack.com/table/v8/docs/guide/column-defs
