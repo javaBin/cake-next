@@ -35,7 +35,8 @@ export function StarRating({count, rating}: StarProps) {
   return <div className="flex items-center">
       {makeStars(stars)}
       {
-        //rating ?? <p className="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">{rating}</p>
+        //<p className="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">{rating}</p>
+        <p className="sr-only">{count} stars, {rating} rating</p>
       }
     </div>
 }
