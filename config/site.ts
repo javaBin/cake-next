@@ -13,6 +13,14 @@ export const siteConfig = {
       title: "Cake",
       href: "/cake",
     },
+    {
+      title: "Cake Query",
+      href: "/cake/query",
+    },
+    {
+      title: "Planning",
+      href: "/planning",
+    },
   ],
   links: {
     twitter: "https://twitter.com/javazone",
