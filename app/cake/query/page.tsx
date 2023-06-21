@@ -54,7 +54,7 @@ export default function QueryPage() {
   return (
     <div className="container py-5">
 
-      <h1 className="scroll-m-20 font-extrabold tracking-tight text-2xl">
+      <h1 className="scroll-m-20 text-2xl font-extrabold tracking-tight">
         Cake Query Builder
       </h1>
       <p className="mb-10 leading-7 [&:not(:first-child)]:mt-6">
