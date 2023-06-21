@@ -1,10 +1,10 @@
 import * as React from "react"
 import Link from "next/link"
 
-import { NavItem } from "@/types/nav"
-import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
-import { Icons } from "@/components/icons"
+import {NavItem} from "@/types/nav"
+import {siteConfig} from "@/config/site"
+import {cn} from "@/lib/utils"
+import {Icons} from "@/components/icons"
 
 interface MainNavProps {
   items?: NavItem[]
@@ -19,7 +19,8 @@ export function MainNav({ items }: MainNavProps) {
       </Link>
       {items?.length ? (
         <nav className="flex gap-6">
-          {items?.map(
+          {items?.filter(value => value.visibility )
+            .map(
             (item, index) =>
               item.href && (
                 <Link

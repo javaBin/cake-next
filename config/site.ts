@@ -8,14 +8,17 @@ export const siteConfig = {
     {
       title: "Home",
       href: "/",
+      visibility: true
     },
     {
       title: "Cake",
       href: "/cake",
+      visibility: true
     },
     {
       title: "Cake Query",
       href: "/cake/query",
+      visibility: true
     },
     {
       title: "Planning",
