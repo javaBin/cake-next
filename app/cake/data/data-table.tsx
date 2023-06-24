@@ -111,17 +111,17 @@ export function DataTable<TData, TValue>({
                   )
                 })}
               </TableRow>
-                <TableRow key={headerGroup.id + "-"}>
-                  {headerGroup.headers.map((header) => {
-                    return (
-                      <TableHead key={header.id + "-"}>
-                        {header.column.getCanFilter() ? (
-                          flexRender(<Filter column={header.column} table={table} />, {})
-                        ) : null}
-                      </TableHead>
-                    )
-                  })}
-                </TableRow>
+              <TableRow key={headerGroup.id + "-"}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <TableHead key={header.id + "-"}>
+                      {header.column.getCanFilter() ? (
+                        flexRender(<Filter column={header.column} table={table} />, {})
+                      ) : null}
+                    </TableHead>
+                  )
+                })}
+              </TableRow>
               </>
             ))}
           </TableHeader>
