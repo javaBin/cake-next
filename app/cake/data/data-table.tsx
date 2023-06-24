@@ -96,6 +96,7 @@ export function DataTable<TData, TValue>({
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
+              <>
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
@@ -106,15 +107,22 @@ export function DataTable<TData, TValue>({
                           header.column.columnDef.header,
                           header.getContext()
                         )}
-                      {header.column.getCanFilter() ? (
-                        <div>
-                          <Filter column={header.column} table={table} />
-                        </div>
-                      ) : null}
                     </TableHead>
                   )
                 })}
               </TableRow>
+                <TableRow key={headerGroup.id + "-"}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id + "-"}>
+                        {header.column.getCanFilter() ? (
+                          flexRender(<Filter column={header.column} table={table} />, {})
+                        ) : null}
+                      </TableHead>
+                    )
+                  })}
+                </TableRow>
+              </>
             ))}
           </TableHeader>
           <TableBody>
