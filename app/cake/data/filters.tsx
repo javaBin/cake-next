@@ -49,6 +49,7 @@ export function Filter({
     <div>
       <div className="flex space-x-2">
         <DebouncedInput
+          id={column.id + "-number-input1"}
           type="number"
           min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
           max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
@@ -64,6 +65,7 @@ export function Filter({
           className="w-24 rounded border shadow"
         />
         <DebouncedInput
+          id={column.id + "-number-input2"}
           type="number"
           min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
           max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
@@ -89,10 +91,11 @@ export function Filter({
         ))}
       </datalist>
       <DebouncedInput
+        id={column.id + "-filter-input"}
         type="text"
         value={(columnFilterValue ?? '') as string}
         onChange={value => column.setFilterValue(value)}
-        placeholder={`Search... (${facetedUniqueValues.size})`}
+        placeholder={`Search (${facetedUniqueValues.size})`}
         className="w-36 rounded border shadow"
         list={column.id + 'list'}
       />
