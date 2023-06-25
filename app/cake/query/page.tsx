@@ -68,11 +68,10 @@ export default function QueryPage() {
           onQueryChange={q => setQuery(q)}
         />
       </QueryBuilderMantine>
-      <h4 className="mt-10">Query</h4>
-      <pre>
-        <code></code>
-      </pre>
 
+      <h4 className="mb-2 mt-10 scroll-m-20 text-xl font-semibold tracking-tight">
+        Query
+      </h4>
       <Tabs defaultValue="jsonlogic" className="w-full overflow-auto">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="jsonlogic">JsonLogic</TabsTrigger>
