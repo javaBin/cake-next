@@ -94,37 +94,35 @@ export function DataTable<TData, TValue>({
       </div>
       <div className="rounded-md border">
         <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <>
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                    </TableHead>
-                  )
-                })}
-              </TableRow>
-              <TableRow key={headerGroup.id + "-"}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id + "-"}>
-                      {header.column.getCanFilter() ? (
-                        flexRender(<Filter column={header.column} table={table} />, {})
-                      ) : null}
-                    </TableHead>
-                  )
-                })}
-              </TableRow>
-              </>
+            {table.getHeaderGroups().map((headerGroup, index) => (
+              <TableHeader key={headerGroup.id + "-" + index}>
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                      </TableHead>
+                    )
+                  })}
+                </TableRow>
+                <TableRow key={headerGroup.id + "-"}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id + "-"}>
+                        {header.column.getCanFilter() ? (
+                          flexRender(<Filter column={header.column} table={table} />, {})
+                        ) : null}
+                      </TableHead>
+                    )
+                  })}
+                </TableRow>
+                </TableHeader>
             ))}
-          </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
