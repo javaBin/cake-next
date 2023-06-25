@@ -3,6 +3,7 @@ import {ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight,} from "lucide-re
 
 import {Button} from "@/components/ui/button"
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from "@/components/ui/select"
+import {uuid} from "@/lib/utils";
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>
@@ -29,7 +30,7 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
             </SelectTrigger>
             <SelectContent side="top">
               {[10, 30, 50, 100, table.getFilteredRowModel().rows.length].map((pageSize) => (
-                <SelectItem key={pageSize} value={`${pageSize}`}>
+                <SelectItem key={uuid()} value={`${pageSize}`}>
                   {pageSize === table.getFilteredRowModel().rows.length ? "All" : pageSize}
                 </SelectItem>
               ))}
