@@ -2,6 +2,16 @@ export type Sessions = Talk[]
 export type SleepingPillResponse = {
   sessions: Sessions
 }
+export type Conference = {
+  id: string
+  name: string
+  slug: string
+  year?: number
+}
+
+export type SleepingPillAllSessionsResponse = {
+  conferences: Conference[]
+}
 
 export interface Talk {
   id: string
