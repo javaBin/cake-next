@@ -1,9 +1,9 @@
 import {type ClassValue, clsx} from "clsx"
 import {twMerge} from "tailwind-merge"
+import {v4} from "uuid";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export const avg = (numbers: number[]) => numbers && numbers.length > 0 ?
-  numbers.reduce((p, c) => p + c) / numbers.length : -1;
+export const uuid = (): string => v4();
