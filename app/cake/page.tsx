@@ -1,20 +1,9 @@
 import {columns} from "./data/columns"
 import {DataTable} from "./data/data-table"
 import {CakeDataRow, SleepingPillResponse} from "@/types/talk";
-
-const url = "https://sleepingpill.javazone.no/public/allSessions/javazone_2022";
-const allSessionsUrl = "https://sleepingpill.javazone.no/public/allSessions"
-
-async function getData(): Promise<SleepingPillResponse> {
-  const res = await fetch(url, { next: { revalidate: 10 } })
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
-  }
-
-  return res.json()
-}
+import {Skeleton} from "@/components/ui/skeleton";
+import {JSX, Suspense} from "react";
+import {getConference, getPublicJavaZoneData} from "@/app/cake/data/db/sleepingPill";
 
 function tranformData(data: SleepingPillResponse): CakeDataRow[] {
    return data.sessions.map(value => {
@@ -45,13 +34,33 @@ function tranformData(data: SleepingPillResponse): CakeDataRow[] {
   })
 }
 
-export default async function CakeIndexPage() {
-  const res = await getData()
-  const data = tranformData(res);
+function fallback(): JSX.Element {
+  return (
+    <div className="flex items-center space-x-4">
+      <Skeleton className="h-12 w-12 rounded-full" />
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-[250px]" />
+        <Skeleton className="h-4 w-[200px]" />
+      </div>
+    </div>
+  )
+}
+
+const ComponentAsync = async () => {
+  const sleepingPillResponse = await getPublicJavaZoneData(getConference(2023).slug)
+  const data = tranformData(sleepingPillResponse)
 
   return (
+    <DataTable columns={columns} data={data} />
+  )
+}
+
+export default async function CakeIndexPage() {
+  return (
     <div className="container py-5">
-      <DataTable columns={columns} data={data} />
+      <Suspense fallback={fallback()}>
+        <ComponentAsync />
+      </Suspense>
     </div>
   )
 }
