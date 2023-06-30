@@ -6,7 +6,8 @@ const url = "https://sleepingpill.javazone.no/public/allSessions/";
 const allSessionsUrl = "https://sleepingpill.javazone.no/public/allSessions"
 
 export function getConference(year: number): Conference {
-  const conference = allConferences.conferences.find(c => c.year == year)
+  const conference = allConferences.conferences
+    .find(c => c.year == year)
 
   if (!conference) throw new Error("Cannot find conference " + year)
 
@@ -23,7 +24,7 @@ export const getPublicJavaZoneData = async (year: string): Promise<SleepingPillR
   return res.json()
 }
 
-export const prefetchAllConferencesSync = async (progressCallback?: (n: number) => void): Promise<SleepingPillResponse[]> => {
+export const getAllConferencesSync = async (progressCallback?: (n: number) => void): Promise<SleepingPillResponse[]> => {
   const allConferencesList: SleepingPillAllSessionsResponse = allConferences;
 
   const total = allConferencesList.conferences.length
@@ -40,16 +41,11 @@ export const prefetchAllConferencesSync = async (progressCallback?: (n: number) 
   return Promise.resolve(conferences);
 }
 
-export const prefetchAllConferencesAsync = () => {
-  const allConferencesList: SleepingPillAllSessionsResponse = allConferences;
-  void allConferencesList.conferences.map(value => getPublicJavaZoneData(value.slug))
+export const getSelectedConferences = async (slugs: string[]):  Promise<SleepingPillResponse[]> => {
+  return await Promise.all(slugs.map(slug => getPublicJavaZoneData(slug)))
 }
 
-export const preloadJavaZoneData = (year: string) => {
-  void getPublicJavaZoneData(year)
-}
-
-export const preloadAllConferencesList = async (): Promise<SleepingPillAllSessionsResponse> => {
+export const getAllConferencesList = async (): Promise<SleepingPillAllSessionsResponse> => {
   const allSessions = await fetch(allSessionsUrl);
 
   if (!allSessions.ok) {
@@ -57,4 +53,17 @@ export const preloadAllConferencesList = async (): Promise<SleepingPillAllSessio
   }
 
   return allSessions.json();
+}
+
+export const preloadAllConferencesList = () => {
+  void fetch(allSessionsUrl);
+}
+
+export const preloadAllConferencesAsync = () => {
+  const allConferencesList: SleepingPillAllSessionsResponse = allConferences;
+  void allConferencesList.conferences.map(value => getPublicJavaZoneData(value.slug))
+}
+
+export const preloadJavaZoneData = (year: string) => {
+  void getPublicJavaZoneData(year)
 }
