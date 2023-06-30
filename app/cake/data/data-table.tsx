@@ -23,6 +23,7 @@ import {DataTablePagination} from "@/app/cake/data/pagination";
 import {DataTableViewOptions} from "@/app/cake/data/viewoptions";
 import {useState} from "react";
 import {Filter, fuzzyFilter} from "@/app/cake/data/filters";
+import JavaZoneSelector from "@/app/cake/data/javazone-selector";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -74,15 +75,14 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex flex-wrap py-4">
+      <div className="flex flex-wrap space-y-2 md:space-y-0 my-2">
+        <JavaZoneSelector  callbackFn={(slug: string) => {}}/>
         <Input
           type="text"
           id="ftsb"
           name="ftsb"
           placeholder="Search"
-          //value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            //table.getColumn("title")?.setFilterValue(event.target.value)
             setGlobalFilter(String(event.target.value))
           }
           className="grow md:max-w-sm md:grow-0"
