@@ -1,0 +1,170 @@
+[
+  {
+    "index": 1,
+    "Attraction/Museum": "Hotel Sultania",
+    "Address": "Hoca Paşa, Mehmet Murat Sk. No 4, 34110 Fatih/İstanbul, Türkiye",
+    "Lat/Long": "41.012630, 28.977430",
+    "GPSCoord": "41° 0' 45.468'' N, 28° 58' 38.748'' E"
+  },
+  {
+    "index": 2,
+    "Attraction/Museum": "Hagia Sophia",
+    "Address": "Sultan Ahmet, Ayasofya Meydanı, 34122 Fatih/İstanbul, Turkey",
+    "Lat/Long": "41.007759, 28.979059",
+    "GPSCoord": "41° 0' 27.9324'' N, 28° 58' 44.6124'' E"
+  },
+  {
+    "index": 3,
+    "Attraction/Museum": "Sultan Ahmet Mosque (Blue Mosque)",
+    "Address": "Sultan Ahmet, Atmeydanı Cd. No:7, 34122 Fatih/İstanbul, Turkey",
+    "Lat/Long": "41.005829, 28.976200",
+    "GPSCoord": "41° 0' 20.9844'' N, 28° 58' 34.32'' E"
+  },
+  {
+    "index": 4,
+    "Attraction/Museum": "Basilica Cistern",
+    "Address": "Alemdar, Yerebatan Cd. 1/3, 34110 Fatih/İstanbul, Turkey",
+    "Lat/Long": "41.008301, 28.978201",
+    "GPSCoord": "41° 0' 29.8836'' N, 28° 58' 41.5236'' E"
+  },
+  {
+    "index": 5,
+    "Attraction/Museum": "Hippodrome",
+    "Address": "Binbirdirek, At Meydanı Cd No:53 D:68, 34122 Fatih/İstanbul, Türkiye",
+    "Lat/Long": "41.005460, 28.974510",
+    "GPSCoord": "41° 0' 19.656'' N, 28° 58' 28.236'' E"
+  },
+  {
+    "index": 6,
+    "Attraction/Museum": "Grand Bazaar",
+    "Address": "Beyazıt, Kalpakçılar Cd. No:22, 34126 Fatih/İstanbul, Turkey",
+    "Lat/Long": "41.011000, 28.967040",
+    "GPSCoord": "41° 0' 39.6'' N, 28° 58' 1.344'' E"
+  },
+  {
+    "index": 7,
+    "Attraction/Museum": "Topkapi Palace",
+    "Address": "Cankurtaran, Harem İçi Sultanahmet Topkapı Sarayı, 34122 Fatih/İstanbul, Türkiye",
+    "Lat/Long": "41.011540, 28.983340",
+    "GPSCoord": "41° 0' 41.544'' N, 28° 59' 0.024'' E"
+  },
+  {
+    "index": 8,
+    "Attraction/Museum": "Gülhane Park",
+    "Address": "Cankurtaran, Kennedy Cd., 34122 Fatih/İstanbul, Turkey",
+    "Lat/Long": "41.013390, 28.979380",
+    "GPSCoord": "41° 0' 48.204'' N, 28° 58' 45.768'' E"
+  },
+  {
+    "index": 9,
+    "Attraction/Museum": "Egyptian Bazaar (aka Spice Bazaar, aka Mısır Çarşısı)",
+    "Address": "Rüstem Paşa, Erzak Ambarı Sok. No:92, 34116 Fatih/İstanbul, Turkey",
+    "Lat/Long": "41.016382, 28.971035",
+    "GPSCoord": "41° 0' 58.9752'' N, 28° 58' 15.726'' E"
+  },
+  {
+    "index": 10,
+    "Attraction/Museum": "Galata Tower",
+    "Address": "Bereketzade, Galata Kulesi, 34421 Beyoğlu/İstanbul, Turkey",
+    "Lat/Long": "41.025630, 28.974220",
+    "GPSCoord": "41° 1' 32.268'' N, 28° 58' 27.192'' E"
+  },
+  {
+    "index": 11,
+    "Attraction/Museum": "Taksim Square",
+    "Address": "Gümüşsuyu, 34437 Beyoğlu/İstanbul, Turkey",
+    "Lat/Long": "41.037453, 28.985159",
+    "GPSCoord": "41° 2' 14.8308'' N, 28° 59' 6.5724'' E"
+  },
+  {
+    "index": 12,
+    "Attraction/Museum": "Dolmabahce Palace",
+    "Address": "Vişnezade, Dolmabahçe Cd., 34357 Beşiktaş/İstanbul, Turkey",
+    "Lat/Long": "41.039848, 28.998880",
+    "GPSCoord": "41° 2' 23.4528'' N, 28° 59' 55.968'' E"
+  },
+  {
+    "index": 13,
+    "Attraction/Museum": "Rumeli Fortress",
+    "Address": "Sarıyer, Yahya Kemal Cd. No:42, 34470 Sarıyer/İstanbul, Turkey",
+    "Lat/Long": "41.085340, 29.056620",
+    "GPSCoord": "41° 5' 7.224'' N, 29° 3' 23.832'' E"
+  },
+  {
+    "index": 14,
+    "Attraction/Museum": "Emirgan Korusu",
+    "Address": "Reşitpaşa, Emirgan Sk., 34467 Sarıyer/İstanbul, Türkiye",
+    "Lat/Long": "41.106278, 29.047902",
+    "GPSCoord": "41° 6' 22.6008'' N, 29° 2' 52.4472'' E"
+  },
+  {
+    "index": 15,
+    "Attraction/Museum": "Maiden's Tower",
+    "Address": "Üsküdar, Üsküdar Salacak Mevkii, 34668 Üsküdar/İstanbul, Turkey",
+    "Lat/Long": "41.021079, 29.004086",
+    "GPSCoord": "41° 1' 15.8844'' N, 29° 0' 14.7096'' E"
+  },
+  {
+    "index": 16,
+    "Attraction/Museum": "Kadıköy Meydanı",
+    "Address": "Caferağa, Rıhtım Cd. 2, 34710 Kadıköy/İstanbul, Türkiye",
+    "Lat/Long": "40.991041, 29.022051",
+    "GPSCoord": "40° 59' 27.7476'' N, 29° 1' 19.3836'' E"
+  },
+  {
+    "index": 17,
+    "Attraction/Museum": "Princess Island",
+    "Address": "Kınalıada, Kınalı Çarşı Cd. 10a, 34977 Adalar/İstanbul, Türkiye",
+    "Lat/Long": "40.909010, 29.055160",
+    "GPSCoord": "40° 54' 32.436'' N, 29° 3' 18.576'' E"
+  },
+  {
+    "index": 18,
+    "Attraction/Museum": "Hodjapasha Culture Center (Whirling Dervish Show)",
+    "Address": "Hocapaşa, Ankara Cd. No:3, 34110 Fatih/İstanbul, Turkey",
+    "Lat/Long": "41.014258, 28.975655",
+    "GPSCoord": "41° 0' 51.3288'' N, 28° 58' 32.358'' E"
+  },
+  {
+    "index": 19,
+    "Attraction/Museum": "Museum of Turkish & Islamic Arts",
+    "Address": "Binbirdirek, At Meydanı Cd No:12, 34122 Fatih/İstanbul, Türkiye",
+    "Lat/Long": "41.006137, 28.975228",
+    "GPSCoord": "41° 0' 22.0932'' N, 28° 58' 30.8208'' E"
+  },
+  {
+    "index": 20,
+    "Attraction/Museum": "Museum Of The History Of Science and Technology in Islam",
+    "Address": "Cankurtaran, Gülhane Parkı, Taya Hatun Sk No:8A, 34122 Fatih/İstanbul, Türkiye",
+    "Lat/Long": "41.013849, 28.979794",
+    "GPSCoord": "41° 0' 49.8564'' N, 28° 58' 47.2584'' E"
+  },
+  {
+    "index": 21,
+    "Attraction/Museum": "Istiklal Street",
+    "Address": "Şahkulu, İstiklal Cd. No:263, 34421 Beyoğlu/İstanbul, Türkiye",
+    "Lat/Long": "41.028468, 28.974328",
+    "GPSCoord": "41° 1' 42.4848'' N, 28° 58' 27.5808'' E"
+  },
+  {
+    "index": 22,
+    "Attraction/Museum": "Istanbul Archaeology Museums",
+    "Address": "Cankurtaran, Osman Hamdi Bey Yokuşu Sk. No:1, 34122 Fatih/İstanbul, Turkey",
+    "Lat/Long": "41.011537, 28.981168",
+    "GPSCoord": "41° 0' 41.5332'' N, 28° 58' 52.2048'' E"
+  },
+  {
+    "index": 23,
+    "Attraction/Museum": "Beylerbeyi Palace",
+    "Address": "Beylerbeyi, Abdullahağa Cd., 34676 Üsküdar/İstanbul, Türkiye",
+    "Lat/Long": "41.042287, 29.040283",
+    "GPSCoord": "41° 2' 32.2332'' N, 29° 2' 25.0188'' E"
+  },
+  {
+    "index": 24,
+    "Attraction/Museum": "Istanbul Aquarium",
+    "Address": "Şenlikköy, Yeşilköy Halkalı Cd. No:93, 34153 Florya/İstanbul, Türkiye",
+    "Lat/Long": "40.964520, 28.799920",
+    "GPSCoord": "40° 57' 52.272'' N, 28° 47' 59.712'' E"
+  }
+]
